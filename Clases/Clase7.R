@@ -24,19 +24,33 @@ muestra <- c(46.4, 46.1, 45.8, 47.0, 46.1, 45.9, 45.8, 46.9, 45.2, 46.0)
 
 #DATOS
 porcentaje = 0.95
-alpha   <- (1-porcentaje) 
+alpha   <- (1-porcentaje) #0.05 
+alfa_s2 <- (alpha/2)      #0.025 --alfa sobre 2
 muestra <- c(46.4, 46.1, 45.8, 47.0, 46.1, 45.9, 45.8, 46.9, 45.2, 46.0)
 
 #VALORES
-n  = length(muestra)
-s2 = var(muestra)
-x2 = (n-1)
+n  = length(muestra)#10
+x2 = (n-1)          #9          --grados de libertad
+s2 = var(muestra)   #0.2862222  --varianza
 
-# RESPUESTA
-qchisq(alpha,x2,lower.tail=F)
-qchisq(alpha,x2,lower.tail=T)
-qchisq(porcentaje,x2,lower.tail=T)
+# RESPUESTA --Chi
+qchisq(alpha,x2,lower.tail=F)     #16.91898
+qchisq(alpha,x2,lower.tail=T)     #3.325113
+qchisq(porcentaje,x2,lower.tail=T)#16.91898
 
-qchisq(0.05,9,lower.tail=F)
-qchisq(0.05,9,lower.tail=T)
-qchisq(0.95,9,lower.tail=T)
+qchisq(0.05,9,lower.tail=F)#16.91898
+qchisq(0.05,9,lower.tail=T)#3.325113
+qchisq(0.95,9,lower.tail=T)#16.91898
+qchisq(0.95,9,lower.tail=F)#3.325113
+
+#Para calcular la chi para el limite superior:
+chi<- qchsiq(alfa_s2,x2,lower.tail=T)      #2.7
+chi<- qchsiq((1-alfa_s2),x2,lower.tail=F)  #2.7
+
+ls = ((x2*s2)/chi)                         #((9*0.28)/2.7) 
+#
+
+#Para calcular la chi para el limite inferior:
+chi<- qchisq((1-alfa_s2),9,lower.tail=T)#19.02277
+li = ((x2*s2)/chi)                         #((9*0.28)/19) 
+#
