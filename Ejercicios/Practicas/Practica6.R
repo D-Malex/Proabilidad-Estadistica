@@ -1,4 +1,4 @@
-# IMPORTS & DECLARES            
+# IMPORTS & DECLARES
 # Manipulación y análisis de datos
 install.packages(c("dplyr", "readr"))
 # Visualización
@@ -7,49 +7,48 @@ install.packages(c("ggplot2", "corrplot", "qqplotr", "ggpubr"))
 install.packages(c("broom", "expss"))
 # Interacción con lenguajes
 install.packages("languageserver")
+# Saco las linternas
+remove.packages("lintr")
 
 library(dplyr)
 library(readr)
 library(ggplot2)
-library(corrplot)
 library(qqplotr)
+library(corrplot)
 library(ggpubr)
 library(broom)
 library(expss)
-library(languageserver) 
+library(languageserver)
 
 
-# 1. 
-# Utilizar el dataset Faithful de R base y analizar si las variables continuas se distribuyen normalmente. Justificar.
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------
+# 1. Utilizar el dataset Faithful de R base y analizar si las variables continuas se distribuyen normalmente. Justificar.
 
 
-#---@ VARIABLES CONTINUAS @---#
-# Las variables continuas son aquellas que pueden tomar un número infinito de valores dentro de un # rango específico. Se caracterizan por poder medirse y dividirse en fracciones, lo que significa # que pueden ser representadas en una escala numérica continua.
-#---@                     @---#
+#----------------------------------------------CAMAPANA--------------------------------------------------------------------------
+# Generar una variable continua que sigue una distribución normal
+n <- length(faithful)                                           # Número de observaciones
+media <- mean(faithful$eruptions)                               # Media de la distribución
+desviacion_estandar <- sd(faithful$eruptions)                   # Desviación estándar de la distribución
+datos <- rnorm(n, mean = media, sd = desviacion_estandar)       # Generamos los datos
+df <- data.frame(valores = datos)                               # Crear un data frame para la visualización
+ggplot(df, aes(x = valores)) +                                  # Graficar la distribución normal
+  geom_density(fill = "blue", alpha = 0.5, size = 1) +
+  labs(title = "Histograma de Erupciones con Curva de Densidad", x = "Duración de las Erupciones", y = "Densidad") +
 
+n <- length(faithful)                                           # Número de observaciones
+media <- mean(faithful$waiting)                                 # Media de la distribución
+desviacion_estandar <- sd(faithful$waiting)                     # Desviación estándar de la distribución
+datos <- rnorm(n, mean = media, sd = desviacion_estandar)       # Generamos los datos
+df <- data.frame(valores = datos)                               # Crear un data frame para la visualización
+ggplot(df, aes(x = valores)) +                                  # Graficar la distribución normal
+  geom_density(fill = "blue", alpha = 0.5, size = 1) +
+  labs(title = "Histograma de Tiempos con Curva de Densidad", x = "Intervalos entre erupciones", y = "Densidad") +
 
-#---@ DISTRIBUCIN NORMAL  @---#
-# Cuando decimos que un conjunto de datos se distribuye normalmente, nos referimos a que sigue una # distribución normal, también conocida como distribución gaussiana. Esta es una de las 
-# distribuciones más importantes en estadística
-
-# Características de la Distribución Normal
-# 
-# 1. Forma de Campana: La gráfica de la distribución normal tiene forma de campana,
-#    simétrica alrededor de la media.
-#
-# 2. Media, Mediana y Moda Iguales: En una distribución normal, la media (promedio),
-#    la mediana (el valor central) y la moda (el valor más frecuente) son todos iguales
-#    y se encuentran en el centro de la distribución.
-#
-# 3. Desviación Estándar: La dispersión de los datos se mide mediante la desviación estándar.
-#    Aproximadamente el 68% de los datos se encuentran dentro de una desviación estándar de la media,   
-#    el 95% dentro de dos desviaciones estándar y el 99.7% dentro de tres desviaciones estándar.
-#    Esto es conocido como la regla empírica o 68-95-99.7.
-#
-# 4. Colas: Las colas de la distribución se extienden hacia ambos lados de la media,
-#    pero nunca tocan el eje horizontal, lo que implica que hay una probabilidad, aunque muy
-#    pequeña, de que ocurran valores extremos.
-#---@                     @---#
+# JUSTIFICACION:
+# Forma de Campana: Si el histograma y la curva de densidad muestran una forma de campana y son simétricos alrededor de la media,
+# esto sugiere que la variable eruptions o waiting puede seguir una distribución normal.
+#-------------------------------------------------------------------------------------------------------------------------------
 
 
 View(volcan <- faithful)
@@ -62,15 +61,18 @@ x_values <- seq(min(volcan$eruptions), max(volcan$eruptions), length.out = 100)
 y_values <- dnorm(x_values, mean = mu, sd = sigma)
 # Crear el gráfico
 erup_isNormal <- ggplot(data = faithful, aes(x = eruptions)) +
-    geom_histogram(aes(y = ..density..), bins = 30, fill = "lightgray", alpha = 0.5) +
-    geom_density(color = "blue") +
-    labs(title = "Distribución de Erupciones de Old Faithful con Curva Normal",
-       x = "Duración de Erupciones (minutos)",
-       y = "Densidad")
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "lightgray", alpha = 0.5) +
+  geom_density(color = "blue") +
+  labs(
+    title = "Distribución de Erupciones de Old Faithful con Curva Normal",
+    x = "Duración de Erupciones (minutos)",
+    y = "Densidad"
+  )
 
 erup_isNormal
 
-erup_isNormal <- ggplot(data = faithful, aes(x = eruptions)) + geom_function(fun = dnorm)
+erup_isNormal <- ggplot(data = faithful, aes(x = eruptions)) +
+  geom_function(fun = dnorm)
 erup_isNormal
 # La función que estás utilizando, geom_function(fun = dnorm),
 # solo traza la curva de densidad de una distribución normal
@@ -87,7 +89,9 @@ erup_isNormal
 # distribución normal. Si los puntos se alinean aproximadamente
 # en una línea recta, los datos son normales.
 
-ggplot(volcan, aes(sample = volcan$eruptions)) + geom_qq() + geom_qq_line() 
+ggplot(volcan, aes(sample = volcan$eruptions)) +
+  geom_qq() +
+  geom_qq_line()
 
 ggplot(volcan, aes(sample = volcan$eruptions)) +
   geom_qq_band(color = "red", fill = "green", alpha = 0.3, linetype = "dashed", linewidth = 1) +
@@ -97,9 +101,14 @@ ggplot(volcan, aes(sample = volcan$eruptions)) +
 
 
 
-ggplot(volcan, aes(sample = volcan$waiting)) + geom_qq() + geom_qq_line() 
+ggplot(volcan, aes(sample = volcan$waiting)) +
+  geom_qq() +
+  geom_qq_line()
 
-ggplot(volcan, aes(sample = volcan$waiting)) + geom_qq_band(color = "red",
-    fill = "green", alpha = 0.3, linetype = "dashed", linewidth = 1) + stat_qq_line() +
-    stat_qq_point(color = "blue", shape = 21, alpha = 0.4)
-
+ggplot(volcan, aes(sample = volcan$waiting)) +
+  geom_qq_band(
+    color = "red",
+    fill = "green", alpha = 0.3, linetype = "dashed", linewidth = 1
+  ) +
+  stat_qq_line() +
+  stat_qq_point(color = "blue", shape = 21, alpha = 0.4)
