@@ -7,7 +7,6 @@ install.packages(c("ggplot2", "corrplot", "qqplotr", "ggpubr"))
 install.packages(c("broom", "expss"))
 # Interacción con lenguajes
 install.packages("languageserver")
-# Saco las linternas
 
 # IMPORTS
 library(dplyr)
