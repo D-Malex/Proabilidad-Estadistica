@@ -1,0 +1,9 @@
+linters: linters_with_defaults(
+    line_length_linter(120),
+    commented_code_linter = NULL
+  )
+exclusions: list(
+    "Clases/Clase9.R",
+    "Teoria.R"
+  ) # see vignette("lintr")
+encoding: "UTF-8"

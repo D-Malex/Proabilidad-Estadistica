@@ -14,3 +14,64 @@
 #    Esto es conocido como la regla empírica o 68-95-99.7.
 # 4. Colas: Las colas de la distribución se extienden hacia ambos lados de la media, pero nunca tocan el eje horizontal, lo que implica que hay una probabilidad,
 #    aunque muy pequeña, de que ocurran valores extremos.
+
+
+
+
+
+
+
+# UTIL:
+# DOWNLOAD
+# Manipulación y análisis de datos
+install.packages(c("dplyr", "readr"))
+# Visualización
+install.packages(c("ggplot2", "corrplot", "qqplotr", "ggpubr"))
+# Modelado y análisis estadístico
+install.packages(c("broom", "expss"))
+# Interacción con lenguajes
+install.packages("languageserver")
+# Saco las linternas
+remove.packages("lintr")
+
+# IMPORTS
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(qqplotr)
+library(corrplot)
+library(ggpubr)
+library(broom)
+library(expss)
+library(languageserver)
+
+
+# GGPLOT -- https://ggplot2.tidyverse.org/reference/index.html
+# aes()  -- Construct aesthetic mappings
+ggplot(data = dataset, aes(x = valor_X, y = valor_y))
+
+# geom_qq()
+# Grafica en una linea Oblicua con su punta superior en la derecha y 
+# su punta inferior en la izquierda, marca puntos de la muestra (sample).
+# geom_qq_line
+# Hace visible la linea
+# geom_hline(yintercept = 8) + geom_vline(xintercept = 0)
+# Genera un mapa carteciano pequeño
+ggplot(data = dataset, aes(sample = variable)) + 
+  geom_qq() + 
+  geom_qq_line() +
+  geom_hline(yintercept = 8) + 
+  geom_vline(xintercept = 0)
+
+# as.numeric()
+# Transforma un valor String a numerico
+as.numeric("2")
+
+# length()
+# Te da el recuento de las columnas de un dataset
+length(swiss)
+
+# nrow()
+# Te da el recuento de las filas de un dataset
+nrow(swiss)
+
