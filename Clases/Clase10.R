@@ -23,3 +23,55 @@ library(languageserver)
 #------------------------------------------------------------------------------
 # Estimación por intervalo de confianza para la proporción
 # El intervalo de confianza se calcula como [Li;Ls] donde Li,Ls = p ± z ⋅ p^q^n−−−√
+insurance <- read_csv("CSV/insurance.csv")
+insurance
+
+insurance_continue <- insurance[, c("age", "bmi", "charges")]
+insurance_continue
+
+# ──────────────────────────────EDAD────────────────────────────────────┐ 
+n        <- length(insurance_continue)      # Tamaño de la muestra
+mean_age <- round(mean(insurance$age))      # Media muestral
+s        <- sd(insurance$age)               # Desvío estandár
+z_95     <- 0.95                            # Nivel de confianza
+
+se       <- s / sqrt(n)                     # Error estandár
+a        <- 1-z_95                          # Valor critico de t  
+t        <- qt(1 - a / 2, n - 1)
+
+li <- mean_age - t * se
+ls <- mean_age + t * se
+cat("Intervalo de confianza:", round(li), "a", round(ls), " años.\n")
+# ─────────────────────────────────────────────────────────────────────┘
+
+
+# ──────────────────────────────BMI────────────────────────────────────┐ 
+n        <- length(insurance_continue)      # Tamaño de la muestra
+mean_BMI <- round(mean(insurance$bmi))      # Media muestral
+s        <- sd(insurance$bmi)               # Desvío estandár
+z_95     <- 0.95                            # Nivel de confianza
+
+se       <- s / sqrt(n)                     # Error estandár
+a        <- 1-z_95                          # Valor critico de t  
+t        <- qt(1 - a / 2, n - 1)
+
+li <- mean_BMI - t * se
+ls <- mean_BMI + t * se
+cat("Intervalo de confianza:", round(li,2), "a", round(ls,2), " índice de masa.\n")
+# ─────────────────────────────────────────────────────────────────────┘
+
+
+# ──────────────────────────────CHARGES────────────────────────────────────┐ 
+n        <- length(insurance_continue)         # Tamaño de la muestra
+mean_charges <- round(mean(insurance$charges)) # Media muestral
+s        <- sd(insurance$charges)              # Desvío estandár
+z_95     <- 0.95                               # Nivel de confianza
+
+se       <- s / sqrt(n)                        # Error estandár
+a        <- 1-z_95                             # Valor critico de t  
+t        <- qt(1 - a / 2, n - 1)
+
+li <- mean_charges - t * se
+ls <- mean_charges + t * se
+cat("Intervalo de confianza:", li, "a", ls, " carga.\n")
+# ─────────────────────────────────────────────────────────────────────────┘
