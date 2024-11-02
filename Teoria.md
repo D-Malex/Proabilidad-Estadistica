@@ -1,5 +1,4 @@
-# Variables Estadísticas
-
+# Teoria
 
 ## 1. Tipos de Variables
 
@@ -35,7 +34,7 @@
 
 ### Características
 
-1. **Media, Mediana y Moda**: Coinciden en el mismo punto central.
+1. **Media, Mediana y Moda**: Coinciden en el mismo punto central, (mean, median, mode).
 2. **Simetría**: La forma de la campana es simétrica respecto a la media.
 3. **Concentración de Valores**: La mayoría de los valores se concentran alrededor de la media; la probabilidad de valores extremos disminuye al alejarse de la media.
 
@@ -49,7 +48,6 @@ hist(variable, main="Histograma de la variable", xlab="Valores", ylab="Frecuenci
 qqnorm(variable)
 qqline(variable, col="red")
 ```
-
 
 ---
 
@@ -84,9 +82,13 @@ prop  # Resultado: 0.75
 
 - Proporciona información sobre la variabilidad de los datos.
 
+```R
+sd(variable)
+```
+
 ---
 
-## 5. Estimación por Intervalo de Confianza
+## 5. Estimación por Intervalo de Confianza (Probabilidad)
 
 - **Definición**: Un rango de valores que se utiliza para estimar un parámetro poblacional (como la media) a partir de una muestra.
 
@@ -119,7 +121,29 @@ cat("Intervalo de confianza:", lower_bound, "a", upper_bound, "\n")
 
 ---
 
-## Recursos Útiles
+## 6. Estimación por Intervalo de Confianza (Proporcion)
+
+- **Definicion**: La Estimación por intervalo de confianza para la proporción es un método estadístico utilizado para estimar el rango de valores dentro del cual es probable que se encuentre la verdadera proporción de una población, basándose en los datos obtenidos de una muestra. Es una herramienta fundamental en inferencia estadística, ya que proporciona una manera de expresar la incertidumbre de la estimación.
+
+### ¿Qué es la proporción?
+
+La proporción es una medida que representa la fracción de elementos en una población o muestra que cumplen una determinada condición. Por ejemplo, si en una encuesta 140 de 200 personas respondieron "sí" a una pregunta, la proporción muestral sería
+
+```
+𝑝 = 140 / 200 = 0.7 (o el 70%)
+```
+
+### ¿Para qué sirve?
+
+Medir la precisión de la estimación: En lugar de dar solo un valor puntual (como la proporción muestral), el intervalo proporciona un rango, lo que refleja la incertidumbre inherente a la inferencia basada en muestras.
+Tomar decisiones informadas: Al conocer el intervalo, se puede determinar si una proporción poblacional puede diferir significativamente de un valor específico (por ejemplo, si es probable que la proporción de personas que aprueban una medida supere el 50%).
+Comparar proporciones: Ayuda a comparar proporciones entre diferentes grupos o muestras y evaluar si la diferencia observada es significativa.
+
+### Ejemplo
+
+Si calculas un intervalo de confianza del `95%` para una proporción y obtienes que es de `[0.65, 0.75]`, puedes decir con un `95%` de confianza que la verdadera proporción de la población está entre `65%` y `75%`. Esto no significa que la proporción esté definitivamente en ese intervalo, sino que si se repitiera el proceso de muestreo muchas veces, aproximadamente el `95%` de los intervalos construidos de esta manera contendrían la proporción real.
+
+## Recursos Útiles	
 
 ### Instalación de Paquetes en R
 
@@ -170,8 +194,3 @@ ggplot(data = dataset, aes(sample = variable)) +
 - `as.numeric()`: Transforma un valor string a numérico.
 - `length()`: Te da el recuento de las columnas de un dataset.
 - `nrow()`: Te da el recuento de las filas de un dataset.
-
-```
-
-Siente libre de modificar cualquier parte según tus necesidades. ¡Espero que te sea útil para tu estudio!
-```

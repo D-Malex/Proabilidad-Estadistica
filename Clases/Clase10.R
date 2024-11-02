@@ -21,8 +21,7 @@ library(languageserver)
 
 
 #------------------------------------------------------------------------------
-# Estimación por intervalo de confianza para la proporción
-# El intervalo de confianza se calcula como [Li;Ls] donde Li,Ls = p ± z ⋅ p^q^n−−−√
+# Estimación por intervalo de confianza para la media
 insurance <- read_csv("CSV/insurance.csv")
 insurance
 
@@ -30,7 +29,7 @@ insurance_continue <- insurance[, c("age", "bmi", "charges")]
 insurance_continue
 
 # ──────────────────────────────EDAD────────────────────────────────────┐ 
-n        <- length(insurance_continue)      # Tamaño de la muestra
+n        <- nrow(insurance_continue)      # Tamaño de la muestra
 mean_age <- round(mean(insurance$age))      # Media muestral
 s        <- sd(insurance$age)               # Desvío estandár
 z_95     <- 0.95                            # Nivel de confianza
@@ -46,7 +45,7 @@ cat("Intervalo de confianza:", round(li), "a", round(ls), " años.\n")
 
 
 # ──────────────────────────────BMI────────────────────────────────────┐ 
-n        <- length(insurance_continue)      # Tamaño de la muestra
+n        <- nrow(insurance_continue)      # Tamaño de la muestra
 mean_BMI <- round(mean(insurance$bmi))      # Media muestral
 s        <- sd(insurance$bmi)               # Desvío estandár
 z_95     <- 0.95                            # Nivel de confianza
@@ -62,7 +61,7 @@ cat("Intervalo de confianza:", round(li,2), "a", round(ls,2), " índice de masa.
 
 
 # ──────────────────────────────CHARGES────────────────────────────────────┐ 
-n        <- length(insurance_continue)         # Tamaño de la muestra
+n        <- nrow(insurance_continue)         # Tamaño de la muestra
 mean_charges <- round(mean(insurance$charges)) # Media muestral
 s        <- sd(insurance$charges)              # Desvío estandár
 z_95     <- 0.95                               # Nivel de confianza
