@@ -47,10 +47,10 @@ cat("Intervalo de confianza del 95% para la proporción:", round(li,2)*100, "% a
 # ──────────────────────────────────────────────────────────────────────────┘
 
 # ───────────────────────────────NETFLIX────────────────────────────────────┐
-En una muestra aleatoria de n=500
- familias que están suscriptas a plataformas en la Ciudad Autónoma de Buenos Aires, se encuentran que x=340
- están suscriptas a Netflix. Calcular el intervalo de confianza del 95%
- para la porporción real de familias que están suscriptas a Netflix en CABA.
+# En una muestra aleatoria de n=500 familias que están suscriptas a 
+# plataformas en la Ciudad Autónoma de Buenos Aires, se encuentran que x=340
+# están suscriptas a Netflix. Calcular el intervalo de confianza del 95% para 
+# la porporción real de familias que están suscriptas a Netflix en CABA.
 
 n    <- 500                                       # Tamaño de la muestra
 x    <- 340                                       # Número de éxitos 
