@@ -143,6 +143,99 @@ Comparar proporciones: Ayuda a comparar proporciones entre diferentes grupos o m
 
 Si calculas un intervalo de confianza del `95%` para una proporción y obtienes que es de `[0.65, 0.75]`, puedes decir con un `95%` de confianza que la verdadera proporción de la población está entre `65%` y `75%`. Esto no significa que la proporción esté definitivamente en ese intervalo, sino que si se repitiera el proceso de muestreo muchas veces, aproximadamente el `95%` de los intervalos construidos de esta manera contendrían la proporción real.
 
+## 7. La distribución Chi (o Ji) Cuadrado
+
+```R
+dchisq(x, df, ncp=0, log = F)	                        # Devuelve resultados de la función de densidad.
+pchisq(q, df, ncp=0, lower.tail = T, log.p = F)	        # Devuelve resultados de la función de distribución acumulada.
+qchisq(p, df, ncp=0, lower.tail = T, log.p = F)	        # Devuelve resultados de los cuantiles de la ji-Cuadrada.
+rchisq(n, df, ncp=0)	                                # Devuelve un vector de valores de la ji-Cuadrada aleatorios.
+```
+### Los argumentos que podemos pasar a las funciones expuestas en la anterior tabla, son:
+- `x`,`q` : Vector de cuantiles.
+- `p` : Vector de probabilidades.
+- `n` : Números de observaciones.
+- `df` : Grados de libertad.
+- `lower.tail` : Parámetro booleano, si es TRUE (por defecto), las probabilidades son P[X ≤ x], de lo contrario, P [X > x].
+
+#### Ejercicios.
+¿Cuál es el valor que tiene la ji-cuadrado con un área de cola de 0.900 y 5 grados de libertad?
+
+P(χ^2 < x) = 0.999 con 20 grados de libertad.
+P(χ^2 ≥ 18.49) con 30 grados de libertad.
+
+## 8. La regresión lineal 
+La regresión lineal es una técnica estadística utilizada para modelar la relación entre dos variables cuantitativas: una variable dependiente (también llamada variable respuesta o output) y una variable independiente (o predictora). El objetivo es predecir el valor de la variable dependiente en función de la variable independiente.
+
+En un modelo de regresión lineal simple, se busca ajustar una línea recta a un conjunto de datos, donde la ecuación general de esa línea es:
+  `y=β0+β1x+ϵ`
+
+- `y` : Es la variable dependiente u output(respuesta), es decir, el valor que queremos predecir (ejemplo: peso, calificaciones).
+- `x` : Es la variable independiente o predictora, el valor que usamos para hacer la predicción (ejemplo: altura, horas de estudio).
+- `β0` : Es el intercepto o constante, que representa el valor de y cuando x=0 (corte de la recta con el eje y)
+- `β1` : Es el coeficiente de pendiente o slope, que indica el cambio en y por cada unidad de cambio en x (representa la inclinación de la recta).
+- `ϵ` : Es el error o término residual, que capta la variabilidad en y que no se puede explicar por x.
+
+# 9. Elaboración de un Modelo de Regresión Lineal
+
+Para ello utilizaremos las funciones `lm()` de **R Base** y la función `tidy()` del paquete **broom**. Utilizaremos los datos de la base `altura_peso.csv` que cargaremos previamente.
+
+## Estructura de la función `lm()`
+
+```r
+lm(y ~ x, data)
+```
+
+- **`y`**: variable explicada (dependiente, output).
+- **`x`**: variable explicativa (independiente, predictora).
+- **`data`**: dataset empleado.
+
+### Ejemplo aplicado
+
+En nuestro caso:
+
+```r
+modelo_caso_1 <- lm(Peso ~ Altura, data = altura_peso)
+```
+
+Ahora, vamos a pedir un resumen del modelo, usando la función `tidy()`:
+
+```r
+res_mod_1 <- tidy(modelo_caso_1)
+res_mod_1
+```
+
+### Salida esperada
+
+```r
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)   32.2      8.89        3.62 4.63e- 4
+## 2 Altura         0.678    0.0525     12.9  7.22e-23
+```
+
+
+Este código y su salida muestran cómo construir y resumir un modelo de regresión lineal simple en R utilizando datos de `altura_peso.csv`.
+
+# 10. ¿Cual es el grado de relación lineal entre dos variables?
+Esto se infiere de la correlación. La correlación es una medida estadística que indica el grado en que dos variables están relacionadas.
+
+El coeficiente de correlación, comúnmente representado como R puede variar entre -1 y 1:
+
+- `R=1` : Indica una correlación positiva perfecta (a medida que una variable aumenta, la otra también lo hace).
+- `R=−1` : Indica una correlación negativa perfecta (a medida que una variable aumenta, la otra disminuye).
+- `R=0` : Indica que no hay correlación lineal entre las variables
+
+## Coeficiente de Determinación R2
+El coeficiente de determinación, es una medida que se utiliza para evaluar la calidad del ajuste del modelo de regresión. Se interpreta como el porcentaje de la variabilidad de la variable dependiente que se puede explicar por la variable independiente en el modelo.
+
+### Interpretación de R2
+- R2 = 0.75 indica que el 75% de la variabilidad en la variable dependiente se puede explicar por la variable independiente. Esto sugiere un buen ajuste del modelo.
+- R2 = 0.25 indica que solo el 25% de la variabilidad se explica, lo que sugiere que el modelo no ajusta bien los datos.
+---
+---
+
 ## Recursos Útiles	
 
 ### Instalación de Paquetes en R

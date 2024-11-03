@@ -3,10 +3,10 @@ linters: linters_with_defaults(
     commented_code_linter = NULL
   )
 exclusions: list(
-    "Clases/Clase9.R",
-    "Clases/Clase10.R",
-    "Clases/Clase11.R",
-    "Ejercicios/Ex5.R",
+    "Clases",
+    "Ejercicios",
+    "Parcial",
+    "TP",
     "Teoria.R"
   ) # see vignette("lintr")
 encoding: "UTF-8"
