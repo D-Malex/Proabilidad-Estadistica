@@ -12,7 +12,7 @@ available.packages("scale")
 library('readr')
 library('dplyr')
 library('scale')
-insurance <- read_csv("insurance.csv")
+insurance <- read_csv("./CSV/insurance.csv")
 
 # Renombro los campos al español
 View(

@@ -5,7 +5,7 @@ install.packages("dplyr")
 # DECLARACIONES
 library(readr)
 library(dplyr)
-insurance <- read_csv("insurance.csv")
+insurance <- read_csv("./CSV/insurance.csv")
 
 # Variable insurance con todos los elementos del .csv y operaciones simples
 View(insurance)
@@ -21,8 +21,6 @@ head(insurance, 5)
 # Nos proporciona un resumen con algunas caracteristicas
 summary(insurance)
 str(insurance)
-
-# ctl + shift + m    Y tenemos un PIPE  %>%
 
 #----------------------------------------------------------#
 #Minimo promeido y maximo

@@ -7,7 +7,7 @@ library(ggplot2)
 library(readr)
 
 # READ DB
-insurance <- read_csv("03-Insurance.csv")
+insurance <- read_csv("./CSV/insurance.csv")
 
 # Grafico del Indice de Masa Corporal
 grafica_BMI <- ggplot(data=insurance, aes(x=bmi))+geom_density(color="red")

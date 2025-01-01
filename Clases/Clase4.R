@@ -7,7 +7,7 @@ library(readr)
 library(dplyr)
 
 # READ DB
-insurance <- read_csv("./CSV/Insurance.csv")
+insurance <- read_csv("./CSV/insurance.csv")
 
 # Tabla de edad
 edad1 <- insurance$age
